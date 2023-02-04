@@ -1,31 +1,29 @@
 # informatica2023
-def linearsolver(A,b):   
-  n = len(A) 
-  M = A 
-
-  i = 0 
-  for x in M:
-   x.append(b[i]) 
-   i += 1 
-
-  for k in range(n):   
-   for i in range(k,n): 
-     if abs(M[i][k]) > abs(M[k][k]):  
-        M[k], M[i] = M[i],M[k]  
-     else: 
-        pass  
-
-   for j in range(k+1,n):
-       q = M[j][k] / M[k][k] 
-       for m in range(k, n+1):         
-          M[j][m] +=  q * M[k][m]
-
-  x = [0 for i in range(n)]
-
-  x[n] =float(M[n][n+1])/M[n][n]
-  for i in range (n-1,-1,-1): 
-    z = 0 
-    for j in range(i+1,n):
-        z = z  + float(M[i][j])*x[j] 
-    x[i] = float(M[i][n+1] - z)/M[i][i]
-  print x 
+import numpy as np
+A = np.matrix([[2.0, 3.0, 4.0, 5.0], [6.0, 15.0,19.0, 23.0],[8.0, 42.0, 60.0, 70.0],[12.0, 60.0,1.0, 17.0]])
+b = np.array([5.0, 30.0, 98.0, 144.0])
+x = np.zeros(len(A))
+def Gauss(A, b):
+#Dimensión del sistema
+     n = len(A)
+#Matriz ampliada
+     Ab = np.c_[A,b]
+#Triangulación
+     for k in range(0,n-1):
+         for i in range(k+1,n):
+             m= +Ab[i,k]/Ab[k,k]
+             for j in range(0,n+1):
+                 Ab[i,j] = Ab[i,j] - m*Ab[k,j]
+                 
+         
+     
+#Sustitución
+     for k in range(n-1,-1,-1):
+         m= 0.0
+         for i in range(k+1,n):
+             m=+ Ab[k,i]*x[i]
+         x[k]= (Ab[k,n] -m)/ Ab[k,k]
+     
+     return x
+x = Gauss(A, b)
+print('\n El vector solución del sistema, x=', x)
