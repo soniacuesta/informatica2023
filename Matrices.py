@@ -37,7 +37,7 @@ def Gauss(A, b):
                 m=m+Ab[k,i]*x[i]
             x[k]= (Ab[k,n]-m)/Ab[k,k]
     return x
-jjjjj
+
 
 
 x = Gauss(A, b)
