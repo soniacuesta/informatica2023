@@ -2,4 +2,4 @@
 Hola me leeís?
 YEs
 buenas
-si yo escrubo
+Esto está cambiado desde spyder si lo veis avisarme inmediatamente
